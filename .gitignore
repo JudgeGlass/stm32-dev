@@ -1,0 +1,3 @@
+build/
+cmsis_*/
+.vscode/
