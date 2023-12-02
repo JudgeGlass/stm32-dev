@@ -2,6 +2,8 @@
 
 #include <string.h>
 
+#include <kernel/kernel.h>
+
 uint8_t timer_expired(uint32_t *t, uint32_t prd, uint32_t now) {
   if (now + prd < *t) *t = 0;                    // Time wrapped? Reset timer
   if (*t == 0) *t = now + prd;                   // Firt poll? Set expiration
@@ -12,6 +14,9 @@ uint8_t timer_expired(uint32_t *t, uint32_t prd, uint32_t now) {
 
 
 int main(void) {
+    systick_init(16000000 / 1000);
+    k_init();
+
     uint16_t led = PIN('B', 14);
     uint16_t led2 = PIN('B', 7);
     uint16_t led3 = PIN('B', 0);
@@ -20,26 +25,17 @@ int main(void) {
     gpio_set_mode(led2, GPIO_MODE_OUTPUT);
     gpio_set_mode(led3, GPIO_MODE_OUTPUT);
 
-    systick_init(16000000 / 1000);
-
-    uart_init(UART3, 115200);
-    char *msg = "Hello World!\r\n";
     uint32_t timer = 0, period = 500;
     for(;;){
         
         if(timer_expired(&timer, period, current_tick())){
-            uart_write_buffer(UART3, msg, strlen(msg));
+            k_print_msg("Hello world!!!\r\n");
             static uint8_t on;
             gpio_write(led, on);
             gpio_write(led2, on);
             gpio_write(led3, on);
             on = !on;
         }
-
-        // gpio_write(led, 1);
-        // sleep_ms(20);
-        // gpio_write(led, 0);
-        // sleep_ms(20);
     }
 
 
