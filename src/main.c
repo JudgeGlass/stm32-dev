@@ -1,34 +1,8 @@
-#include "hal/hal.h"
-
-#include <string.h>
-
 #include <kernel/kernel.h>
 
-int main(void) {
-    systick_init(16000000 / 1000);
+int __main(void) {
     k_init();
-
-    uint16_t led = PIN('B', 14);
-    uint16_t led2 = PIN('B', 7);
-    uint16_t led3 = PIN('B', 0);
-
-    gpio_set_mode(led, GPIO_MODE_OUTPUT);
-    gpio_set_mode(led2, GPIO_MODE_OUTPUT);
-    gpio_set_mode(led3, GPIO_MODE_OUTPUT);
-
-    uint32_t timer = 0, period = 500;
-    for(;;){
-        
-        if(timer_expired(&timer, period, current_tick())){
-            k_print_msg("Hello world!!!\r\n");
-            static uint8_t on;
-            gpio_write(led, on);
-            gpio_write(led2, on);
-            gpio_write(led3, on);
-            on = !on;
-        }
-    }
-
+    k_main();
 
     return 0; 
 }
@@ -40,7 +14,7 @@ __attribute__((naked, noreturn)) void _reset(void) {
     for (long *dst = &_sbss; dst < &_ebss; dst++) *dst = 0;
     for (long *dst = &_sdata, *src = &_sidata; dst < &_edata;) *dst++ = *src++;
 
-    main();             // Call main()
+    __main();             // Call main()
     for (;;) (void) 0;  // Infinite loop in the case if main() returns
 }
 

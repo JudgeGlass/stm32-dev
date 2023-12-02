@@ -1,6 +1,7 @@
 #ifndef __KERNEL_H__
 #define __KERNEL_H__
 
+#include <stdio.h>
 #include <stdlib.h>
 #include <inttypes.h>
 #include <string.h>
@@ -13,6 +14,8 @@ typedef struct {
 } process_t;
 
 void k_init();
+
+void k_main();
 
 void* k_malloc(size_t m_size);
 
