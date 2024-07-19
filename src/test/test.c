@@ -1,8 +1,8 @@
-#include "kernel/kernel.h"
+#include "test/test.h"
 
 void k_init(){
     systick_init(16000000 / 1000);
-    uart_init(UART3, 119200);
+    uart_init(USART3, 119200);
 }
 
 void k_main(){
@@ -43,7 +43,7 @@ void k_free(void* m_mem){
 }
 
 void k_print_msg(char *m_msg){
-    uart_write_buffer(UART3, m_msg, strlen(m_msg));
+    uart_write_buffer(USART3, m_msg, strlen(m_msg));
 }
 
 static uint32_t panic(){

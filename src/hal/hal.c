@@ -49,13 +49,13 @@ void uart_init(USART_TypeDef *uart, unsigned long baud){
     uint8_t af = 7;
     uint16_t rx = 0, tx = 0;
 
-    if (uart == UART1) RCC->APB2ENR |= BIT(4);
-    if (uart == UART2) RCC->APB1ENR |= BIT(17);
-    if (uart == UART3) RCC->APB1ENR |= BIT(18);
+    if (uart == USART1) RCC->APB2ENR |= BIT(4);
+    if (uart == USART2) RCC->APB1ENR |= BIT(17);
+    if (uart == USART3) RCC->APB1ENR |= BIT(18);
 
-    if (uart == UART1) tx = PIN('A', 9), rx = PIN('A', 10);
-    if (uart == UART2) tx = PIN('A', 2), rx = PIN('A', 3);
-    if (uart == UART3) tx = PIN('D', 8), rx = PIN('D', 9);
+    if (uart == USART1) tx = PIN('A', 9), rx = PIN('A', 10);
+    if (uart == USART2) tx = PIN('A', 2), rx = PIN('A', 3);
+    if (uart == USART3) tx = PIN('D', 8), rx = PIN('D', 9);
 
     gpio_set_mode(tx, GPIO_MODE_AF);
     gpio_set_af(tx, af);

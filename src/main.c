@@ -1,4 +1,4 @@
-#include <kernel/kernel.h>
+#include <test/test.h>
 
 int __main(void) {
     k_init();

@@ -4,7 +4,7 @@ CFLAGS  ?=  -W -Wall -Wextra -Wundef -Wshadow -Wdouble-promotion \
             -I. -Iinclude -Icmsis_core/CMSIS/Core/Include -Icmsis_f4/Include \
             -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 $(EXTRA_CFLAGS)
 LDFLAGS ?= -Tlinker/link.ld -nostartfiles -nostdlib --specs nano.specs -lc -lgcc -Wl,--gc-sections -Wl,-Map=$@.map
-SOURCES = $(wildcard src/*.c) $(wildcard src/hal/*.c) $(wildcard src/kernel/*.c)
+SOURCES = $(wildcard src/*.c) $(wildcard src/hal/*.c) $(wildcard src/test/*.c)
 SOURCES += cmsis_f4/Source/Templates/gcc/startup_stm32f429xx.s # ST startup file. Compiler-dependent!
 
 CC = arm-none-eabi-gcc

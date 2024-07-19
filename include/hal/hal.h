@@ -17,9 +17,9 @@
 
 #define SYSTICK ((SysTick_Type *) (0xE000E010)) 
 
-#define UART1 ((USART_TypeDef *) 0x40011000)
-#define UART2 ((USART_TypeDef *) 0x40004400)
-#define UART3 ((USART_TypeDef *) 0x40004800)
+// #define UART1 ((USART_TypeDef *) 0x40011000)
+// #define UART2 ((USART_TypeDef *) 0x40004400)
+// #define UART3 ((USART_TypeDef *) 0x40004800)
 
 enum { GPIO_MODE_INPUT, GPIO_MODE_OUTPUT, GPIO_MODE_AF, GPIO_MODE_ANALOG };
 
